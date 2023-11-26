@@ -41,10 +41,11 @@ P= np.array([
 
 difList = []  #lista pra armazenar as diferenças    
 for i in range(N):
-    dif = np.max(np.abs(P - np.dot(A,P)))
+    Pnovo = np.dot(A,P)
+    Pnovo = Pnovo/np.sum(Pnovo)  # normaliza dentro do loop? parece que ficou melhor assim
+    dif = np.max(np.abs(P - Pnovo))
     difList.append(dif)
-    P = np.dot(A,P)
-    P = P/np.sum(P)  # normaliza dentro do loop? parece que ficou melhor assim
+    P = Pnovo  
     print(P)
     #A = np.dot(A,A)
     #print(np.dot(A,P))
