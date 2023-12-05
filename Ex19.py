@@ -40,26 +40,37 @@ P= np.array([
 ])
 
 difList = []  #lista pra armazenar as diferenças    
+dispList = []  #lista pra armazenar as disponibilidades 
+
 for i in range(N):
     Pnovo = np.dot(A,P)
     Pnovo = Pnovo/np.sum(Pnovo)  # normaliza dentro do loop? parece que ficou melhor assim
     dif = np.max(np.abs(P - Pnovo))
     difList.append(dif)
     P = Pnovo  
+    disp = 1 - P[3]
+    dispList.append(disp)
     if(i % 2000 == 0):
         print("iteração: " + str(i))
         print(P)
+        print("Disponibilidade: ", disp)
     #A = np.dot(A,A)
     #print(np.dot(A,P))
 #"""
 print("P final: ")
 print(P)
 
-print("Disponibilidade Assintótica = ", 1- P[3])
+print("Disponibilidade Assintótica = ", disp)
 
 # Plotando o gráfico
 plt.plot(list(range(N)), difList)
 plt.xlabel('Iterações')
 plt.ylabel('Máxima Diferença')
 plt.title('Evolução da Diferença Máxima em Cada Iteração')
+plt.show()
+
+plt.plot(list(range(N)), dispList)
+plt.xlabel('Iterações')
+plt.ylabel('Disponibilidade')
+plt.title('Evolução da Disponibilidade em Cada Iteração')
 plt.show()
