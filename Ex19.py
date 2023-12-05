@@ -46,10 +46,14 @@ for i in range(N):
     dif = np.max(np.abs(P - Pnovo))
     difList.append(dif)
     P = Pnovo  
-    print(P)
+    if(i % 2000 == 0):
+        print("iteração: " + str(i))
+        print(P)
     #A = np.dot(A,A)
     #print(np.dot(A,P))
 #"""
+print("P final: ")
+print(P)
 
 print("Disponibilidade Assintótica = ", 1- P[3])
 
