@@ -21,9 +21,9 @@ MTTRp = 1*30*24   #tempo medio ate reparo preventivo
 l = 1/MTTF     #lambda = taxa de falha
 mic = 1/MTTRc  #mic = taxa de reparo corretivo
 mip = 1/MTTRp  #mip = taxa de reparo preventivo
-C = 0.7   #0.7 ou 1   #fator de cobertura (chance da falha ser detectada)
-deltat = 1e-3   #testa valores pequenos????
-N = 20000   # número de iterações
+C = 1   #0.7 ou 1   #fator de cobertura (chance da falha ser detectada)
+deltat = 1e-3   #usa valores pequenos
+N = 50000   # número de iterações
 
 A = np.array([
     [1 - 2*l*deltat, 2*l*C*deltat              , l*(1-C)*deltat          , l*(1-C)*deltat],  #1 - ambos os modulos funcionando
@@ -31,6 +31,8 @@ A = np.array([
     [mip*deltat    , 0                         , 1-l*deltat - mip*deltat , l*deltat],        #3 - 1 funcionando e 1 teve uma falha não detectada
     [mic*deltat    , 0                         , 0                       , 1 - mic*deltat]   #F - sistema não está funcionando
 ])
+
+A=A.T
 
 P= np.array([
     [1],
